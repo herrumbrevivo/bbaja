@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Los Caracoles de La Fuentiña · Herrumbre Vivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#FAF6F0;font-family:'DM Sans',sans-serif;max-width:480px;margin:0 auto;min-height:100vh;}
+header{background:#2C1A0E;padding:10px 18px;display:flex;align-items:center;gap:8px;position:sticky;top:0;z-index:50;border-bottom:3px solid #C8A84B;}
+.header-sub{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#C8A84B;font-weight:500;white-space:nowrap;}
+.header-title{font-family:'Playfair Display',serif;font-size:13px;color:#D4B96A;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.hero{position:relative;height:60vh;min-height:340px;overflow:hidden;background:#1a1a1a;}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:center;}
+.hero-gradient{position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(to top,rgba(20,10,5,0.97),transparent);pointer-events:none;}
+.hero-info{position:absolute;bottom:0;left:0;right:0;padding:22px 22px 22px;}
+.hero-tag{display:inline-block;font-size:9px;letter-spacing:0.13em;text-transform:uppercase;color:#D4B96A;background:rgba(44,26,14,0.6);border:1px solid rgba(212,185,106,0.3);padding:3px 9px;border-radius:3px;margin-bottom:9px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:2.3rem;color:#fff;line-height:1.05;margin-bottom:5px;}
+.hero-author{font-size:12px;color:#D4B96A;font-weight:300;}
+.lang-bar{background:#2C1A0E;padding:12px 18px;display:flex;gap:7px;overflow-x:auto;border-top:1px solid rgba(212,185,106,0.15);}
+.lang-bar::-webkit-scrollbar{display:none;}
+.lang-btn{flex-shrink:0;padding:6px 15px;border-radius:20px;border:1px solid rgba(212,185,106,0.25);background:transparent;color:#D4B96A;font-size:12px;cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif;}
+.lang-btn.active{background:#C8A84B;border-color:#C8A84B;color:#1a1a1a;}
+.section{padding:24px 22px;border-bottom:1px solid rgba(120,100,80,0.12);}
+.section-label{display:flex;align-items:center;gap:7px;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#7A6A5A;margin-bottom:12px;}
+.section-label::before{content:'';display:block;width:16px;height:1px;background:#C8A84B;flex-shrink:0;}
+.description{font-size:14.5px;line-height:1.74;color:#2a2a2a;font-weight:300;}
+.description p+p{margin-top:13px;}
+.ficha{margin-top:18px;border:1px solid rgba(120,100,80,0.18);border-radius:8px;overflow:hidden;}
+.ficha-row{display:flex;border-bottom:1px solid rgba(120,100,80,0.12);}
+.ficha-row:last-child{border-bottom:none;}
+.ficha-label{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#7A6A5A;font-weight:500;padding:10px 13px;background:rgba(200,168,75,0.07);width:38%;flex-shrink:0;}
+.ficha-value{font-size:13px;color:#2a2a2a;padding:10px 13px;font-weight:300;line-height:1.4;}
+.location-address{font-size:13.5px;color:#7A6A5A;margin-bottom:13px;}
+.map-frame{width:100%;height:190px;border:none;border-radius:8px;margin:13px 0;}
+.maps-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;background:#8B1A1A;color:#fff;border-radius:8px;text-decoration:none;font-size:14px;transition:background 0.2s;}
+.maps-btn:hover{background:#6B1212;}
+.poi-list{display:flex;flex-direction:column;gap:9px;margin-top:4px;}
+.poi-item{display:flex;align-items:center;padding:13px 15px;border:1px solid rgba(120,100,80,0.2);border-radius:10px;gap:11px;text-decoration:none;color:inherit;transition:all 0.2s;}
+.poi-item:hover{border-color:#C8A84B;background:rgba(200,168,75,0.06);}
+.poi-name{font-size:13.5px;font-weight:500;margin-bottom:2px;}
+.poi-cat{font-size:11.5px;color:#7A6A5A;}
+.poi-dist{font-size:12.5px;color:#7A6A5A;margin-right:6px;white-space:nowrap;}
+.chevron{color:#7A6A5A;font-size:17px;}
+footer{background:#1C1008;padding:24px 22px;display:flex;flex-direction:column;align-items:center;gap:12px;border-top:3px solid #C8A84B;}
+.footer-logo{font-family:'Playfair Display',serif;color:#D4B96A;font-size:1.2rem;}
+.footer-url{color:rgba(212,185,106,0.6);font-size:10.5px;text-decoration:none;}
+.footer-copy{font-size:9px;color:rgba(212,185,106,0.35);text-align:center;letter-spacing:0.07em;text-transform:uppercase;}
+.lang-panel{display:none;}
+.lang-panel.active{display:block;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-sub">Instalación artística · Puntallana</div>
+  <div class="header-title">Los Caracoles de La Fuentiña</div>
+</header>
+
+<div class="hero">
+  <img src="https://res.cloudinary.com/dzcvq5lkp/image/upload/v1778587718/PXL_20260303_133008603-2_qwrkvi.jpg" alt="Los Caracoles de La Fuentiña · Herrumbre Vivo">
+  <div class="hero-gradient"></div>
+  <div class="hero-info">
+    <h1>Los Caracoles<br>de La Fuentiña</h1>
+    <p class="hero-author">Gustavo Díaz · Herrumbre Vivo · 2026</p>
+  </div>
+</div>
+
+<div class="lang-bar" id="lang-bar">
+  <button class="lang-btn active" onclick="setLang('es',this)">Español</button>
+  <button class="lang-btn" onclick="setLang('en',this)">English</button>
+  <button class="lang-btn" onclick="setLang('de',this)">Deutsch</button>
+  <button class="lang-btn" onclick="setLang('fr',this)">Français</button>
+</div>
+
+<!-- SOBRE LA OBRA -->
+<section class="section">
+  <div class="section-label" id="about-label-es">Sobre la obra</div>
+  <div class="section-label" id="about-label-en" style="display:none">About the artwork</div>
+  <div class="section-label" id="about-label-de" style="display:none">Über das Kunstwerk</div>
+  <div class="section-label" id="about-label-fr" style="display:none">À propos de l'œuvre</div>
+
+  <div class="lang-panel active" id="text-es">
+    <div class="description">
+      <p>Dos caracoles de metal reciclado descansan junto al antiguo lavadero de La Fuentiña. Sus conchas son tapacubos blancos de automóvil, desgastados y oxidados. Sus cuerpos, chapas y varillas forjadas a mano. Sus ojos, pequeñas tapas cromadas que brillan contra el hierro viejo.</p>
+      <p>No están aquí por azar. El caracol vive donde hay agua y musgo. Prospera en la piedra húmeda, en las grietas sombreadas. Prospera exactamente aquí, donde las mujeres de Puntallana lavaban la ropa durante generaciones.</p>
+      <p>Los primeros lavaderos no eran más que lajas de piedra en el cauce de los barrancos, a los que las mujeres debían descender para lavar la ropa. Con el tiempo, los lavaderos se acercaron a los núcleos de población. A mediados del siglo XIX surgieron los lavaderos públicos, que pronto se convirtieron en algo más que un espacio de trabajo: eran el lugar de encuentro de las mujeres del pueblo, el sitio donde la necesidad y la comunidad se daban la mano. La Fuentiña es heredera directa de esa tradición.</p>
+      <p>Desde Herrumbre Vivo creemos que los materiales tienen muchas historias que contar. La oxidación no se oculta — es el tiempo, el uso, el ciclo de vida. Es lo que hace que la pieza sea verdadera.</p>
+    </div>
+    <div class="ficha">
+      <div class="ficha-row"><div class="ficha-label">Técnica</div><div class="ficha-value">Ensamblaje y soldadura de metal reciclado</div></div>
+      <div class="ficha-row"><div class="ficha-label">Materiales</div><div class="ficha-value">Tapacubos, chapas y varillas de automóvil</div></div>
+      <div class="ficha-row"><div class="ficha-label">Piezas</div><div class="ficha-value">2 esculturas</div></div>
+      <div class="ficha-row"><div class="ficha-label">Año</div><div class="ficha-value">2026</div></div>
+      <div class="ficha-row"><div class="ficha-label">Promotor</div><div class="ficha-value">Ayuntamiento de Puntallana</div></div>
+    </div>
+  </div>
+
+  <div class="lang-panel" id="text-en">
+    <div class="description">
+      <p>Two recycled metal snails rest beside the old washing place of La Fuentiña. Their shells are worn, oxidised white hubcaps from discarded vehicles. Their bodies, hand-forged metal sheets and rods. Their eyes, small chrome caps that gleam against the aged iron.</p>
+      <p>They are not here by chance. Snails live where there is water and moss. They thrive on damp stone, in shaded cracks — exactly here, where the women of Puntallana washed clothes for generations.</p>
+      <p>The first washing places were nothing more than stone slabs in ravine beds, where women had to descend to do their laundry. Over time, washhouses were built closer to the villages. By the mid-19th century, public laundries had appeared — soon becoming more than workplaces: they were the meeting point of the village women, where necessity and community went hand in hand. La Fuentiña is a direct heir to that tradition.</p>
+      <p>At Herrumbre Vivo we believe materials have many stories to tell. Oxidation is not hidden — it is time, use, and the cycle of life. It is what makes the piece true.</p>
+    </div>
+    <div class="ficha">
+      <div class="ficha-row"><div class="ficha-label">Technique</div><div class="ficha-value">Assembly and welding of recycled metal</div></div>
+      <div class="ficha-row"><div class="ficha-label">Materials</div><div class="ficha-value">Hubcaps, metal sheets and car rods</div></div>
+      <div class="ficha-row"><div class="ficha-label">Pieces</div><div class="ficha-value">2 sculptures</div></div>
+      <div class="ficha-row"><div class="ficha-label">Year</div><div class="ficha-value">2026</div></div>
+      <div class="ficha-row"><div class="ficha-label">Promoted by</div><div class="ficha-value">Ayuntamiento de Puntallana</div></div>
+    </div>
+  </div>
+
+  <div class="lang-panel" id="text-de">
+    <div class="description">
+      <p>Zwei Schnecken aus Recyclingmetall ruhen neben der alten Waschstelle La Fuentiña. Ihre Gehäuse sind verwitterte, oxidierte Radkappen von Autos. Ihre Körper sind handgeschmiedete Metallplatten und Stäbe. Ihre Augen, kleine Chromkappen, glänzen gegen das alte Eisen.</p>
+      <p>Sie sind nicht zufällig hier. Schnecken leben dort, wo es Wasser und Moos gibt. Sie gedeihen auf feuchten Steinen, in schattigen Spalten — genau hier, wo die Frauen von Puntallana über Generationen hinweg ihre Wäsche wuschen.</p>
+      <p>Die ersten Waschplätze waren nichts anderes als Steinplatten in Schluchten, zu denen die Frauen hinabsteigen mussten. Im Laufe der Zeit entstanden Waschplätze näher an den Dörfern. Mitte des 19. Jahrhunderts entstanden öffentliche Waschplätze, die bald mehr als Arbeitsorte wurden: Sie waren der Treffpunkt der Dorfbewohnerinnen. La Fuentiña ist ein direktes Erbe dieser Tradition.</p>
+      <p>Bei Herrumbre Vivo glauben wir, dass Materialien viele Geschichten zu erzählen haben. Oxidation wird nicht versteckt — sie ist Zeit, Gebrauch und der Kreislauf des Lebens.</p>
+    </div>
+    <div class="ficha">
+      <div class="ficha-row"><div class="ficha-label">Technik</div><div class="ficha-value">Montage und Schweißen von Recyclingmetall</div></div>
+      <div class="ficha-row"><div class="ficha-label">Materialien</div><div class="ficha-value">Radkappen, Metallbleche und Fahrzeugstäbe</div></div>
+      <div class="ficha-row"><div class="ficha-label">Stücke</div><div class="ficha-value">2 Skulpturen</div></div>
+      <div class="ficha-row"><div class="ficha-label">Jahr</div><div class="ficha-value">2026</div></div>
+      <div class="ficha-row"><div class="ficha-label">Gefördert von</div><div class="ficha-value">Ayuntamiento de Puntallana</div></div>
+    </div>
+  </div>
+
+  <div class="lang-panel" id="text-fr">
+    <div class="description">
+      <p>Deux escargots en métal recyclé reposent près de l'ancien lavoir de La Fuentiña. Leurs coquilles sont des enjoliveurs blancs usés et oxydés. Leurs corps, des tôles et tiges forgées à la main. Leurs yeux, de petites capsules chromées qui brillent contre le vieux fer.</p>
+      <p>Ils ne sont pas là par hasard. L'escargot vit là où il y a de l'eau et de la mousse. Il prospère sur la pierre humide, dans les fissures ombragées — exactement ici, où les femmes de Puntallana lavaient le linge depuis des générations.</p>
+      <p>Les premiers lavoirs n'étaient que des dalles de pierre dans les ravins, vers lesquelles les femmes devaient descendre pour laver. Avec le temps, les lavoirs se sont rapprochés des villages. Au milieu du XIXe siècle sont apparus les lavoirs publics, qui devinrent vite bien plus que des lieux de travail : ils étaient le point de rencontre des femmes du village. La Fuentiña est l'héritière directe de cette tradition.</p>
+      <p>Chez Herrumbre Vivo, nous croyons que les matériaux ont beaucoup d'histoires à raconter. L'oxydation ne se cache pas — c'est le temps, l'usage et le cycle de la vie.</p>
+    </div>
+    <div class="ficha">
+      <div class="ficha-row"><div class="ficha-label">Technique</div><div class="ficha-value">Assemblage et soudure de métal recyclé</div></div>
+      <div class="ficha-row"><div class="ficha-label">Matériaux</div><div class="ficha-value">Enjoliveurs, tôles et tiges de voiture</div></div>
+      <div class="ficha-row"><div class="ficha-label">Pièces</div><div class="ficha-value">2 sculptures</div></div>
+      <div class="ficha-row"><div class="ficha-label">Année</div><div class="ficha-value">2026</div></div>
+      <div class="ficha-row"><div class="ficha-label">Promoteur</div><div class="ficha-value">Ayuntamiento de Puntallana</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- UBICACIÓN -->
+<section class="section">
+  <div class="section-label" id="loc-label-es">Ubicación</div>
+  <div class="section-label" id="loc-label-en" style="display:none">Location</div>
+  <div class="section-label" id="loc-label-de" style="display:none">Standort</div>
+  <div class="section-label" id="loc-label-fr" style="display:none">Localisation</div>
+
+  <p class="location-address" id="loc-addr-es">La Fuentiña · Casco histórico de Puntallana, La Palma</p>
+  <p class="location-address" id="loc-addr-en" style="display:none">La Fuentiña · Historic centre of Puntallana, La Palma</p>
+  <p class="location-address" id="loc-addr-de" style="display:none">La Fuentiña · Historisches Zentrum von Puntallana, La Palma</p>
+  <p class="location-address" id="loc-addr-fr" style="display:none">La Fuentiña · Centre historique de Puntallana, La Palma</p>
+
+  <iframe
+    class="map-frame"
+    src="https://maps.google.com/maps?q=28.7421972,-17.7453636&z=17&output=embed"
+    allowfullscreen
+    loading="lazy">
+  </iframe>
+
+  <a class="maps-btn" href="https://www.google.com/maps?q=28.7421972,-17.7453636" target="_blank" rel="noopener noreferrer">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    <span id="maps-btn-es">Abrir en Google Maps</span>
+    <span id="maps-btn-en" style="display:none">Open in Google Maps</span>
+    <span id="maps-btn-de" style="display:none">In Google Maps öffnen</span>
+    <span id="maps-btn-fr" style="display:none">Ouvrir dans Google Maps</span>
+  </a>
+</section>
+
+<!-- PUNTOS DE INTERÉS -->
+<section class="section">
+  <div class="section-label" id="poi-label-es">Puntos de interés cercanos</div>
+  <div class="section-label" id="poi-label-en" style="display:none">Nearby points of interest</div>
+  <div class="section-label" id="poi-label-de" style="display:none">Sehenswürdigkeiten in der Nähe</div>
+  <div class="section-label" id="poi-label-fr" style="display:none">Points d'intérêt à proximité</div>
+
+  <div class="poi-list">
+    <a class="poi-item" href="https://www.google.com/maps/search/Casa+Lujan+Puntallana" target="_blank" rel="noopener noreferrer">
+      <div style="flex:1">
+        <div class="poi-name">Casa Luján</div>
+        <div class="poi-cat" id="poi1-es">Museo etnográfico · Artesanía local · S. XVII</div>
+        <div class="poi-cat" id="poi1-en" style="display:none">Ethnographic museum · Local crafts · 17th c.</div>
+        <div class="poi-cat" id="poi1-de" style="display:none">Ethnographisches Museum · Lokales Kunsthandwerk · 17. Jh.</div>
+        <div class="poi-cat" id="poi1-fr" style="display:none">Musée ethnographique · Artisanat local · XVIIe s.</div>
+      </div>
+      <span class="poi-dist">~50 m</span>
+      <span class="chevron">›</span>
+    </a>
+    <a class="poi-item" href="https://www.google.com/maps/search/Fuente+San+Juan+Puntallana" target="_blank" rel="noopener noreferrer">
+      <div style="flex:1">
+        <div class="poi-name">Fuente de San Juan</div>
+        <div class="poi-cat" id="poi2-es">Manantial histórico</div>
+        <div class="poi-cat" id="poi2-en" style="display:none">Historic spring</div>
+        <div class="poi-cat" id="poi2-de" style="display:none">Historische Quelle</div>
+        <div class="poi-cat" id="poi2-fr" style="display:none">Source historique</div>
+      </div>
+      <span class="poi-dist">~100 m</span>
+      <span class="chevron">›</span>
+    </a>
+    <a class="poi-item" href="https://www.google.com/maps/search/Iglesia+San+Juan+Puntallana" target="_blank" rel="noopener noreferrer">
+      <div style="flex:1">
+        <div class="poi-name">Iglesia de San Juan</div>
+        <div class="poi-cat" id="poi3-es">Bien de Interés Cultural · S. XVI</div>
+        <div class="poi-cat" id="poi3-en" style="display:none">Cultural Heritage Site · 16th c.</div>
+        <div class="poi-cat" id="poi3-de" style="display:none">Kulturgut · 16. Jahrhundert</div>
+        <div class="poi-cat" id="poi3-fr" style="display:none">Bien d'intérêt culturel · XVIe s.</div>
+      </div>
+      <span class="poi-dist">~150 m</span>
+      <span class="chevron">›</span>
+    </a>
+    <a class="poi-item" href="https://www.google.com/maps/search/Mercadillo+Agricultor+Puntallana" target="_blank" rel="noopener noreferrer">
+      <div style="flex:1">
+        <div class="poi-name">Mercadillo del Agricultor</div>
+        <div class="poi-cat" id="poi4-es">Cabras de Herrumbre Vivo · Gustavo Díaz</div>
+        <div class="poi-cat" id="poi4-en" style="display:none">Herrumbre Vivo goats · Gustavo Díaz</div>
+        <div class="poi-cat" id="poi4-de" style="display:none">Herrumbre Vivo Ziegen · Gustavo Díaz</div>
+        <div class="poi-cat" id="poi4-fr" style="display:none">Chèvres Herrumbre Vivo · Gustavo Díaz</div>
+      </div>
+      <span class="poi-dist">~300 m</span>
+      <span class="chevron">›</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <a href="https://herrumbrevivoarte.com" target="_blank" rel="noopener noreferrer" class="footer-logo">Herrumbre Vivo</a>
+  <a href="https://herrumbrevivoarte.com" target="_blank" rel="noopener noreferrer" class="footer-url">herrumbrevivoarte.com</a>
+  <p class="footer-copy">Arte con Residuos · Los Caracoles de La Fuentiña · Puntallana · La Palma · 2026</p>
+</footer>
+
+<script>
+function setLang(lang, btn) {
+  const langs = ['es','en','de','fr'];
+
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  langs.forEach(l => {
+    const panel = document.getElementById('text-' + l);
+    if (panel) panel.className = 'lang-panel' + (l === lang ? ' active' : '');
+  });
+
+  ['about-label','loc-label','poi-label'].forEach(prefix => {
+    langs.forEach(l => {
+      const el = document.getElementById(prefix + '-' + l);
+      if (el) el.style.display = l === lang ? 'flex' : 'none';
+    });
+  });
+
+  langs.forEach(l => {
+    const el = document.getElementById('loc-addr-' + l);
+    if (el) el.style.display = l === lang ? 'block' : 'none';
+  });
+
+  ['maps-btn'].forEach(prefix => {
+    langs.forEach(l => {
+      const el = document.getElementById(prefix + '-' + l);
+      if (el) el.style.display = l === lang ? 'inline' : 'none';
+    });
+  });
+
+  // POI categories
+  for (let i = 1; i <= 4; i++) {
+    langs.forEach(l => {
+      const el = document.getElementById('poi' + i + '-' + l);
+      if (el) el.style.display = l === lang ? 'block' : 'none';
+    });
+  }
+}
+</script>
+
+</body>
+</html>
