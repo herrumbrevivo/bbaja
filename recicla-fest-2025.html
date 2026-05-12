@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recicla Fest 2025 · Herrumbre Vivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#FAF6F0;font-family:'DM Sans',sans-serif;max-width:480px;margin:0 auto;min-height:100vh;}
+header{background:#2C1A0E;padding:10px 18px;display:flex;align-items:center;gap:8px;position:sticky;top:0;z-index:50;border-bottom:3px solid #C8A84B;}
+.header-sub{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#C8A84B;font-weight:500;white-space:nowrap;}
+.header-title{font-family:'Playfair Display',serif;font-size:13px;color:#D4B96A;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.hero{position:relative;height:60vh;min-height:340px;overflow:hidden;background:#1a1a1a;}
+.hero img{width:100%;height:100%;object-fit:contain;}
+.hero-gradient{position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(to top,rgba(20,10,5,0.95),transparent);pointer-events:none;}
+.hero-info{position:absolute;bottom:0;left:0;right:0;padding:22px 22px 22px;}
+.hero-tag{display:inline-block;font-size:9px;letter-spacing:0.13em;text-transform:uppercase;color:#D4B96A;background:rgba(44,26,14,0.6);border:1px solid rgba(212,185,106,0.3);padding:3px 9px;border-radius:3px;margin-bottom:9px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:2.3rem;color:#fff;line-height:1.05;margin-bottom:5px;}
+.hero-author{font-size:12px;color:#D4B96A;font-weight:300;}
+.lang-bar{background:#2C1A0E;padding:12px 18px;display:flex;gap:7px;overflow-x:auto;border-top:1px solid rgba(212,185,106,0.15);}
+.lang-bar::-webkit-scrollbar{display:none;}
+.lang-btn{flex-shrink:0;padding:6px 15px;border-radius:20px;border:1px solid rgba(212,185,106,0.25);background:transparent;color:#D4B96A;font-size:12px;cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif;}
+.lang-btn.active{background:#C8A84B;border-color:#C8A84B;color:#1a1a1a;}
+.section{padding:24px 22px;border-bottom:1px solid rgba(120,100,80,0.12);}
+.section-label{display:flex;align-items:center;gap:7px;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#7A6A5A;margin-bottom:12px;}
+.section-label::before{content:'';display:block;width:16px;height:1px;background:#C8A84B;flex-shrink:0;}
+.description{font-size:14.5px;line-height:1.74;color:#2a2a2a;font-weight:300;}
+.description p+p{margin-top:13px;}
+.location-address{font-size:13.5px;color:#7A6A5A;margin-bottom:13px;}
+.map-frame{width:100%;height:190px;border:none;border-radius:8px;margin:13px 0;}
+.maps-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;background:#8B1A1A;color:#fff;border-radius:8px;text-decoration:none;font-size:14px;transition:background 0.2s;}
+.maps-btn:hover{background:#6B1212;}
+.poi-list{display:flex;flex-direction:column;gap:9px;margin-top:4px;}
+.poi-item{display:flex;align-items:center;padding:13px 15px;border:1px solid rgba(120,100,80,0.2);border-radius:10px;gap:11px;text-decoration:none;color:inherit;transition:all 0.2s;}
+.poi-item:hover{border-color:#C8A84B;background:rgba(200,168,75,0.06);}
+.poi-name{font-size:13.5px;font-weight:500;margin-bottom:2px;}
+.poi-cat{font-size:11.5px;color:#7A6A5A;}
+.poi-dist{font-size:12.5px;color:#7A6A5A;margin-right:6px;white-space:nowrap;}
+.chevron{color:#7A6A5A;font-size:17px;}
+footer{background:#1C1008;padding:24px 22px;display:flex;flex-direction:column;align-items:center;gap:12px;border-top:3px solid #C8A84B;}
+.footer-logo{font-family:'Playfair Display',serif;color:#D4B96A;font-size:1.2rem;}
+.footer-url{color:rgba(212,185,106,0.6);font-size:10.5px;text-decoration:none;}
+.footer-copy{font-size:9px;color:rgba(212,185,106,0.35);text-align:center;letter-spacing:0.07em;text-transform:uppercase;}
+.lang-panel{display:none;}
+.lang-panel.active{display:block;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-sub">Obra conmemorativa · Feria del Mar</div>
+  <div class="header-title">Recicla Fest 2025</div>
+</header>
+
+<div class="hero">
+  <img src="https://res.cloudinary.com/dzcvq5lkp/image/upload/v1778585428/IMG-20250623-WA0048_txclaa.jpg" alt="Recicla Fest 2025 · Herrumbre Vivo">
+  <div class="hero-gradient"></div>
+  <div class="hero-info">
+    <h1>Recicla Fest 2025</h1>
+    <p class="hero-author">Gustavo Díaz · Herrumbre Vivo · 2025</p>
+  </div>
+</div>
+
+<div class="lang-bar" id="lang-bar">
+  <button class="lang-btn active" onclick="setLang('es',this)">Español</button>
+  <button class="lang-btn" onclick="setLang('en',this)">English</button>
+  <button class="lang-btn" onclick="setLang('de',this)">Deutsch</button>
+  <button class="lang-btn" onclick="setLang('fr',this)">Français</button>
+</div>
+
+<section class="section">
+  <div class="section-label" id="about-label-es">Sobre la obra</div>
+  <div class="section-label" id="about-label-en" style="display:none">About the artwork</div>
+  <div class="section-label" id="about-label-de" style="display:none">Über das Kunstwerk</div>
+  <div class="section-label" id="about-label-fr" style="display:none">À propos de l'œuvre</div>
+
+  <div class="lang-panel active" id="text-es">
+    <div class="description">
+      <p>En este Recicla Fest 2025, esta obra Herrumbre Vivo cobra vida como un testimonio palpable de que la sostenibilidad es mucho más que una palabra: es una acción, una transformación y, sobre todo, una oportunidad.</p>
+      <p>Desde Herrumbre Vivo, creemos firmemente en el potencial de lo que otros consideran residuos. A través de la reutilización y la creatividad se demuestra que los materiales tienen muchas historias que contar.</p>
+      <p>Esta obra no solo embellece el espacio, sino que también es un recordatorio visual de la importancia del reciclaje y de cómo nuestras decisiones cotidianas impactan en el futuro de nuestro entorno. Al igual que el Recicla Fest nos invita a reflexionar sobre nuestra relación con el planeta, desde Herrumbre Vivo les animamos a ver el valor oculto en cada objeto y a unirnos al movimiento de construir un mundo más sostenible.</p>
+    </div>
+  </div>
+
+  <div class="lang-panel" id="text-en">
+    <div class="description">
+      <p>At this Recicla Fest 2025, this Herrumbre Vivo artwork comes to life as a tangible testament that sustainability is much more than just a word: it's an action, a transformation, and above all, an opportunity.</p>
+      <p>At Herrumbre Vivo, we firmly believe in the potential of what others consider waste. Through reutilization and creativity, we demonstrate that materials have many stories to tell.</p>
+      <p>This artwork not only beautifies the space but also serves as a visual reminder of the importance of recycling and how our daily decisions impact the future of our environment. Just as Recicla Fest invites us to reflect on our relationship with the planet, we at Herrumbre Vivo encourage you to see the hidden value in every object and to join us in the movement to build a more sustainable world.</p>
+    </div>
+  </div>
+
+  <div class="lang-panel" id="text-de">
+    <div class="description">
+      <p>Auf diesem Recicla Fest 2025 erwacht dieses Kunstwerk von Herrumbre Vivo als greifbares Zeugnis zum Leben, dass Nachhaltigkeit weit mehr als nur ein Wort ist: Sie ist eine Handlung, eine Transformation und vor allem eine Chance.</p>
+      <p>Bei Herrumbre Vivo glauben wir fest an das Potenzial dessen, was andere als Abfall betrachten. Durch Wiederverwendung und Kreativität wird gezeigt, dass Materialien viele Geschichten zu erzählen haben.</p>
+      <p>Dieses Kunstwerk verschönert nicht nur den Raum, sondern dient auch als visuelle Erinnerung an die Bedeutung des Recyclings und daran, wie unsere täglichen Entscheidungen die Zukunft unserer Umwelt beeinflussen. So wie das Recicla Fest uns einlädt, über unsere Beziehung zum Planeten nachzudenken, ermutigen wir Sie von Herrumbre Vivo, den verborgenen Wert in jedem Objekt zu erkennen und sich der Bewegung anzuschließen, eine nachhaltigere Welt aufzubauen.</p>
+    </div>
+  </div>
+
+  <div class="lang-panel" id="text-fr">
+    <div class="description">
+      <p>Lors de ce Recicla Fest 2025, cette œuvre de Herrumbre Vivo prend vie comme un témoignage tangible que la durabilité est bien plus qu'un mot : c'est une action, une transformation et, surtout, une opportunité.</p>
+      <p>Chez Herrumbre Vivo, nous croyons fermement au potentiel de ce que d'autres considèrent comme des déchets. À travers la réutilisation et la créativité, nous démontrons que les matériaux ont de nombreuses histoires à raconter.</p>
+      <p>Cette œuvre n'embellit pas seulement l'espace, elle est aussi un rappel visuel de l'importance du recyclage et de la façon dont nos décisions quotidiennes impactent l'avenir de notre environnement. Tout comme le Recicla Fest nous invite à réfléchir sur notre relation avec la planète, nous vous encourageons chez Herrumbre Vivo à voir la valeur cachée dans chaque objet et à rejoindre le mouvement pour construire un monde plus durable.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label" id="loc-label-es">Ubicación</div>
+  <div class="section-label" id="loc-label-en" style="display:none">Location</div>
+  <div class="section-label" id="loc-label-de" style="display:none">Standort</div>
+  <div class="section-label" id="loc-label-fr" style="display:none">Localisation</div>
+
+  <p class="location-address" id="loc-addr-es">Tazacorte, La Palma</p>
+  <p class="location-address" id="loc-addr-en" style="display:none">Tazacorte, La Palma</p>
+  <p class="location-address" id="loc-addr-de" style="display:none">Tazacorte, La Palma</p>
+  <p class="location-address" id="loc-addr-fr" style="display:none">Tazacorte, La Palma</p>
+
+  <iframe
+    class="map-frame"
+    src="https://maps.google.com/maps?q=28.6510661,-17.9470328&z=16&output=embed"
+    allowfullscreen
+    loading="lazy">
+  </iframe>
+
+  <a class="maps-btn" href="https://www.google.com/maps?q=28.6510661,-17.9470328" target="_blank" rel="noopener noreferrer">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    <span id="maps-btn-es">Abrir en Google Maps</span>
+    <span id="maps-btn-en" style="display:none">Open in Google Maps</span>
+    <span id="maps-btn-de" style="display:none">In Google Maps öffnen</span>
+    <span id="maps-btn-fr" style="display:none">Ouvrir dans Google Maps</span>
+  </a>
+</section>
+
+<section class="section">
+  <div class="section-label" id="poi-label-es">Puntos de interés cercanos</div>
+  <div class="section-label" id="poi-label-en" style="display:none">Nearby points of interest</div>
+  <div class="section-label" id="poi-label-de" style="display:none">Sehenswürdigkeiten in der Nähe</div>
+  <div class="section-label" id="poi-label-fr" style="display:none">Points d'intérêt à proximité</div>
+
+  <div class="poi-list">
+    <a class="poi-item" href="https://www.google.com/maps/search/Puerto+de+Tazacorte" target="_blank" rel="noopener noreferrer">
+      <div style="flex:1">
+        <div class="poi-name">Puerto de Tazacorte</div>
+        <div class="poi-cat">Puerto deportivo y pesquero</div>
+      </div>
+      <span class="poi-dist">300 m</span>
+      <span class="chevron">›</span>
+    </a>
+    <a class="poi-item" href="https://www.google.com/maps/search/Playa+de+Tazacorte" target="_blank" rel="noopener noreferrer">
+      <div style="flex:1">
+        <div class="poi-name">Playa de Tazacorte</div>
+        <div class="poi-cat">Playa de arena negra volcánica</div>
+      </div>
+      <span class="poi-dist">400 m</span>
+      <span class="chevron">›</span>
+    </a>
+    <a class="poi-item" href="https://www.google.com/maps/search/Faro+de+Tazacorte" target="_blank" rel="noopener noreferrer">
+      <div style="flex:1">
+        <div class="poi-name">Faro de Tazacorte</div>
+        <div class="poi-cat">Patrimonio marítimo</div>
+      </div>
+      <span class="poi-dist">600 m</span>
+      <span class="chevron">›</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <a href="https://herrumbrevivoarte.com" target="_blank" rel="noopener noreferrer" class="footer-logo">Herrumbre Vivo</a>
+  <a href="https://herrumbrevivoarte.com" target="_blank" rel="noopener noreferrer" class="footer-url">herrumbrevivoarte.com</a>
+  <p class="footer-copy">Arte con Residuos · Recicla Fest 2025 · Tazacorte · La Palma</p>
+</footer>
+
+<script>
+function setLang(lang, btn) {
+  const langs = ['es','en','de','fr'];
+  
+  // Language buttons
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  // Text panels
+  langs.forEach(l => {
+    const panel = document.getElementById('text-' + l);
+    if (panel) panel.className = 'lang-panel' + (l === lang ? ' active' : '');
+  });
+
+  // Section labels
+  ['about-label','loc-label','poi-label'].forEach(prefix => {
+    langs.forEach(l => {
+      const el = document.getElementById(prefix + '-' + l);
+      if (el) el.style.display = l === lang ? 'flex' : 'none';
+    });
+  });
+
+  // Location address
+  langs.forEach(l => {
+    const el = document.getElementById('loc-addr-' + l);
+    if (el) el.style.display = l === lang ? 'block' : 'none';
+  });
+
+  // Maps button text
+  ['maps-btn'].forEach(prefix => {
+    langs.forEach(l => {
+      const el = document.getElementById(prefix + '-' + l);
+      if (el) el.style.display = l === lang ? 'inline' : 'none';
+    });
+  });
+}
+</script>
+
+</body>
+</html>
