@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jardín de La Bombilla · CaminArte · Herrumbre Vivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  :root{--marron:#2C1A0E;--dorado:#C8A84B;--arena:#D4B96A;--crema:#FAF6F0;--gris-medio:#7A6A5A;--granate:#8B1A1A;--dec-dark:#1A2B35;--dec-mid:#2E5F6E;--dec-accent:#4A9BAF;--hit-dark:#2A1A35;--hit-accent:#8B6BAF;--hit-mid:#5A3A7E;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--crema);color:#1a1a1a;max-width:480px;margin:0 auto;min-height:100vh;}
+  .obra{display:none;}.obra.active{display:block;}
+  .inicio-header{background:var(--marron);padding:18px;display:flex;align-items:center;gap:14px;border-bottom:3px solid var(--dorado);}
+  .inicio-header-text{flex:1;}
+  .inicio-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--arena);line-height:1.2;font-weight:700;}
+  .inicio-subtitle{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(212,185,106,.5);margin-top:4px;}
+  .inicio-section{padding:18px;border-bottom:2px solid rgba(120,100,80,.1);}
+  .inicio-section-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding:12px 14px;border-radius:8px;user-select:none;-webkit-user-select:none;}.inicio-section-header *{pointer-events:none;}
+  .hv-section-header{background:rgba(44,26,14,.05);border-left:3px solid var(--dorado);}
+  .dec-section-header{background:rgba(26,43,53,.05);border-left:3px solid var(--dec-accent);}
+  .hit-section-header{background:rgba(42,26,53,.05);border-left:3px solid var(--hit-accent);}
+  .dec-icon{font-size:26px;flex-shrink:0;}
+  .inicio-section-title{font-family:'Playfair Display',serif;font-size:15px;color:#1a1a1a;}
+  .dec-section-title{color:var(--dec-dark);}
+  .hit-section-title{color:var(--hit-dark);}
+  .inicio-section-sub{font-size:11px;color:var(--gris-medio);margin-top:2px;}
+  .chevron{font-size:18px;color:var(--dorado);transition:transform .3s;flex-shrink:0;}
+  .dec-chevron{color:var(--dec-accent);}.hit-chevron{color:var(--hit-accent);}
+  .chevron.open{transform:rotate(180deg);}
+  .inicio-cards{display:flex;flex-direction:column;gap:9px;}
+  .collapsible{animation:fadeIn .25s ease;}
+  .inicio-card{display:flex;align-items:center;gap:12px;padding:10px 12px;background:#fff;border:1px solid rgba(120,100,80,.18);border-radius:10px;cursor:pointer;transition:border-color .2s,box-shadow .2s;}
+  .inicio-card:hover{border-color:var(--dorado);box-shadow:0 2px 8px rgba(200,168,75,.15);}
+  .inicio-card-dec:hover{border-color:var(--dec-accent);box-shadow:0 2px 8px rgba(74,155,175,.15);}
+  .inicio-card-hit:hover{border-color:var(--hit-accent);box-shadow:0 2px 8px rgba(139,107,175,.15);}
+  .inicio-card-img-wrap{position:relative;flex-shrink:0;}
+  .inicio-card-img{width:64px;height:64px;object-fit:cover;border-radius:6px;display:block;}
+  .inicio-card-info{flex:1;}
+  .inicio-card-num{font-size:9px;letter-spacing:.12em;color:var(--dorado);text-transform:uppercase;margin-bottom:2px;}
+  .inicio-card-title{font-family:'Playfair Display',serif;font-size:14px;color:#1a1a1a;margin-bottom:2px;}
+  .inicio-card-loc{font-size:11px;color:var(--gris-medio);}
+  .obra-header{padding:10px 18px;display:flex;align-items:center;gap:8px;position:sticky;top:0;z-index:100;}
+  .obra-header-hv{background:var(--marron);}
+  .obra-header-dec{background:var(--dec-dark);}
+  .obra-header-hit{background:var(--hit-dark);}
+  .obra-num{font-size:9px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;flex-shrink:0;}
+  .obra-header-hv .obra-num{color:var(--dorado);}
+  .obra-header-dec .obra-num{color:var(--dec-accent);}
+  .obra-header-hit .obra-num{color:var(--hit-accent);}
+  .obra-header-title{font-family:'Playfair Display',serif;font-size:13px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .obra-header-hv .obra-header-title{color:var(--arena);}
+  .obra-header-dec .obra-header-title{color:#b8d8e0;}
+  .obra-header-hit .obra-header-title{color:#c8b8e0;}
+  .obra-header-tag{font-size:8px;letter-spacing:.1em;text-transform:uppercase;flex-shrink:0;padding:3px 7px;border-radius:10px;}
+  .obra-header-hv .obra-header-tag{background:rgba(200,168,75,.2);color:var(--dorado);}
+  .dec-tag{background:rgba(74,155,175,.2);color:var(--dec-accent);}
+  .hit-tag{background:rgba(139,107,175,.2);color:var(--hit-accent);}
+  .hero{position:relative;height:60vh;min-height:340px;overflow:hidden;}
+  .hero-img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:opacity .4s ease;}
+  .hero-img.fade{opacity:0;}
+  .hero-toggle{position:absolute;bottom:14px;right:14px;background:rgba(44,26,14,.78);border:1px solid rgba(212,185,106,.35);color:var(--arena);font-family:'DM Sans',sans-serif;font-size:10px;padding:5px 11px;border-radius:20px;cursor:pointer;backdrop-filter:blur(6px);}
+  .proxima-badge{position:absolute;top:14px;right:14px;background:rgba(139,26,26,.88);border-radius:20px;padding:4px 10px;font-size:9px;color:#fff;letter-spacing:.08em;text-transform:uppercase;font-family:'DM Sans',sans-serif;backdrop-filter:blur(6px);}
+  .hero-gradient{position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(to top,rgba(44,26,14,.92) 0%,transparent 100%);pointer-events:none;}
+  .dec-gradient{background:linear-gradient(to top,rgba(26,43,53,.92) 0%,transparent 100%);}
+  .hit-gradient{background:linear-gradient(to top,rgba(42,26,53,.92) 0%,transparent 100%);}
+  .hero-text{position:absolute;bottom:0;left:0;right:0;padding:26px 22px 22px;}
+  .proyecto-tag{display:inline-block;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--arena);background:rgba(44,26,14,.5);border:1px solid rgba(212,185,106,.3);padding:3px 9px;border-radius:3px;margin-bottom:9px;}
+  .dec-proyecto-tag{background:rgba(26,43,53,.5);border-color:rgba(74,155,175,.4);color:#b8d8e0;}
+  .hit-proyecto-tag{background:rgba(42,26,53,.5);border-color:rgba(139,107,175,.4);color:#c8b8e0;}
+  .hero-title{font-family:'Playfair Display',serif;font-size:2.4rem;color:#fff;line-height:1.05;margin-bottom:5px;}
+  .hero-subtitle{font-size:12px;color:var(--arena);font-weight:300;}
+  .lang-bar{padding:12px 18px;display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;border-top:1px solid rgba(212,185,106,.15);}
+  .lang-bar{background:var(--marron);}
+  .dec-lang-bar{background:var(--dec-dark);border-top-color:rgba(74,155,175,.2);}
+  .lang-bar::-webkit-scrollbar{display:none;}
+  .lang-btn{flex-shrink:0;padding:6px 15px;border-radius:20px;background:transparent;font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;transition:all .2s;border:1px solid rgba(212,185,106,.25);color:var(--arena);}
+  .lang-btn.active{background:var(--dorado);border-color:var(--dorado);color:#1a1a1a;}
+  .dec-lang-btn{border-color:rgba(74,155,175,.25);color:#b8d8e0;}
+  .dec-lang-btn.active{background:var(--dec-accent);border-color:var(--dec-accent);color:#fff;}
+  .section{padding:24px 22px;border-bottom:1px solid rgba(120,100,80,.12);}
+  .section-label{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gris-medio);margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+  .section-label::before{content:'';display:block;width:16px;height:1px;background:var(--dorado);}
+  .dec-label{color:#5a8a9a;}.dec-label::before{background:var(--dec-accent);}
+  .hit-label{color:#8a6aaa;}.hit-label::before{background:var(--hit-accent);}
+  .description{font-size:14.5px;line-height:1.74;color:#2a2a2a;font-weight:300;}
+  .description p+p{margin-top:13px;}
+  .dec-text{color:#1a2a30;}
+  .decima-titulo{font-family:'Playfair Display',serif;font-size:16px;color:var(--dec-dark);margin-bottom:16px!important;font-weight:700;}
+  .decima-texto{font-style:italic;font-size:15px;line-height:1.9;white-space:pre-line;color:#1a2a30;}
+  .decima-autor{margin-top:16px!important;font-size:13px;color:var(--dec-mid);font-weight:500;}
+  .lang-panel{display:none;}.lang-panel.active{display:block;animation:fadeIn .22s ease;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
+  .gallery-strip{display:flex;gap:8px;padding:18px 22px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(120,100,80,.12);}
+  .gallery-strip::-webkit-scrollbar{display:none;}
+  .gallery-strip img{height:100px;width:150px;object-fit:cover;border-radius:6px;flex-shrink:0;}
+  .map-embed{width:100%;height:190px;border:none;border-radius:8px;margin:13px 0 11px;display:block;}
+  .btn-maps{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;color:#fff;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:background .2s;}
+  .btn-maps{background:var(--granate);}.btn-maps:hover{background:#6B1212;}
+  .btn-maps-dec{background:var(--dec-mid);}.btn-maps-dec:hover{background:#1e4a57;}
+  .btn-maps-hit{background:var(--hit-mid);}.btn-maps-hit:hover{background:#3d2560;}
+  .poi-list{display:flex;flex-direction:column;gap:9px;margin-top:4px;}
+  .poi-card{display:flex;align-items:center;padding:13px 15px;border:1px solid rgba(120,100,80,.2);border-radius:10px;gap:11px;text-decoration:none;color:inherit;transition:border-color .2s,background .2s;}
+  .poi-card:hover{border-color:var(--dorado);background:rgba(200,168,75,.06);}
+  .poi-info{flex:1;}.poi-name{font-size:13.5px;font-weight:500;margin-bottom:2px;}.poi-cat{font-size:11.5px;color:var(--gris-medio);}
+  .poi-dist{font-size:12.5px;color:var(--gris-medio);margin-right:6px;white-space:nowrap;}
+  .poi-arrow{color:var(--dorado);flex-shrink:0;}
+  .otras-section{background:rgba(44,26,14,.04);}
+  .otras-dec-section{background:rgba(26,43,53,.04);}
+  .obras-list{display:flex;flex-direction:column;gap:10px;margin-top:4px;}
+  .obra-card{display:flex;align-items:center;gap:12px;padding:10px 12px;background:#fff;border:1px solid rgba(120,100,80,.18);border-radius:10px;cursor:pointer;transition:border-color .2s,box-shadow .2s;}
+  .obra-card:hover{border-color:var(--dorado);box-shadow:0 2px 8px rgba(200,168,75,.12);}
+  .obra-card-img-wrap{position:relative;flex-shrink:0;}
+  .obra-card-img{width:64px;height:64px;object-fit:cover;border-radius:6px;display:block;}
+  .obra-card-badge{position:absolute;bottom:3px;left:3px;background:var(--granate);color:#fff;font-size:7px;letter-spacing:.06em;padding:2px 5px;border-radius:3px;text-transform:uppercase;font-family:'DM Sans',sans-serif;}
+  .obra-card-info{flex:1;}.obra-card-num{font-size:9px;letter-spacing:.12em;color:var(--dorado);text-transform:uppercase;margin-bottom:2px;}
+  .dec-num{color:var(--dec-accent);}.hit-num{color:var(--hit-accent);}
+  .obra-card-title{font-family:'Playfair Display',serif;font-size:14px;color:#1a1a1a;margin-bottom:2px;}.obra-card-loc{font-size:11px;color:var(--gris-medio);}
+  .btn-back{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;background:transparent;border:1px solid rgba(212,185,106,.3);border-radius:20px;color:var(--arena);font-family:'DM Sans',sans-serif;font-size:11px;cursor:pointer;margin:12px 18px 0;background:var(--marron);}
+  .btn-back-dec{border-color:rgba(74,155,175,.3);color:#b8d8e0;background:var(--dec-dark);}
+  .btn-back-hit{border-color:rgba(139,107,175,.3);color:#c8b8e0;background:var(--hit-dark);}
+  .footer{padding:24px 22px;display:flex;flex-direction:column;align-items:center;gap:14px;border-top:3px solid var(--dorado);}
+  .footer-hv{background:#1C1008;}
+  .footer-dec{background:var(--dec-dark);border-top-color:var(--dec-accent);}
+  .footer-hit{background:var(--hit-dark);border-top-color:var(--hit-accent);}
+  .footer-inicio{background:var(--marron);}
+  .footer-logos{display:flex;align-items:center;width:220px;}
+  .footer-logo-side{width:90px;display:flex;justify-content:center;align-items:center;}
+  .footer-sep{width:1px;height:56px;background:rgba(212,185,106,.3);flex-shrink:0;margin:0 16px;}
+  .footer-links{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;}
+  .footer-links a{color:rgba(212,185,106,.6);font-size:10.5px;text-decoration:none;text-align:center;}
+  .footer-dec .footer-links a{color:rgba(74,155,175,.7);}
+  .footer-hit .footer-links a{color:rgba(139,107,175,.7);}
+  .footer-copy{font-size:9px;color:rgba(212,185,106,.35);text-align:center;letter-spacing:.07em;text-transform:uppercase;}
+  .footer-dec .footer-copy{color:rgba(74,155,175,.45);}
+  .footer-hit .footer-copy{color:rgba(139,107,175,.45);}
+  @media(min-width:600px){body{max-width:900px;}.inicio-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;}.inicio-section{padding:24px 28px;}.inicio-header{padding:24px 28px;}.inicio-title{font-size:28px;}.hero{height:52vh;min-height:420px;}.hero-title{font-size:3rem;}.obra-header{padding:12px 28px;}.section{padding:28px 32px;}.lang-bar{padding:14px 28px;}.gallery-strip{padding:20px 32px;}.gallery-strip img{height:130px;width:200px;}.poi-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;}.obras-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;}.inicio-cards.collapsible{display:none;}.inicio-cards.collapsible.open-grid{display:grid;}.map-embed{height:260px;}.btn-back{margin:16px 32px 0;}}
+  @media(min-width:1024px){body{max-width:1100px;}.inicio-cards{grid-template-columns:1fr 1fr 1fr;}.hero{height:55vh;}.poi-list{grid-template-columns:1fr 1fr 1fr;}.obras-list{grid-template-columns:1fr 1fr 1fr;}}
+</style>
+<style>.obra{display:block!important;}</style>
+<style>
+  .placeholder-img {
+    width:100%;height:100%;min-height:100px;
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    background:linear-gradient(135deg,#d9d1c6,#bdb0a0);
+    color:#5f5145;font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+    padding:14px;
+  }
+  .hero .placeholder-img {min-height:340px;}
+  .gallery-strip .placeholder-img {
+    height:100px;width:150px;min-width:150px;border-radius:6px;flex-shrink:0;
+  }
+  .bio-photo-placeholder {
+    width:100%;height:220px;border-radius:8px;margin-bottom:14px;
+    background:linear-gradient(135deg,#d9d1c6,#bdb0a0);
+    display:flex;align-items:center;justify-content:center;
+    color:#5f5145;font-size:11px;letter-spacing:.06em;text-transform:uppercase;text-align:center;padding:15px;
+  }
+  @media(min-width:600px){
+    .gallery-strip .placeholder-img{height:130px;width:200px;min-width:200px;}
+  }
+</style>
+</head>
+<body>
+<div id="obra-bombilla" class="obra active">
+  <div class="obra-header obra-header-hv">
+    <div class="obra-num">CaminArte</div>
+    <div class="obra-header-title">Jardín de La Bombilla</div>
+    <div class="obra-header-tag">Herrumbre Vivo</div>
+  </div>
+
+  <div class="hero">
+    <!-- SUSTITUIR por <img class="hero-img" src="URL_DE_LA_FOTO" alt="Jardín de La Bombilla"> -->
+    <div class="placeholder-img">Foto principal del jardín / actuación</div>
+    <div class="hero-gradient"></div>
+    <div class="hero-text">
+      <div class="proyecto-tag">Herrumbre Vivo · CaminArte · Los Llanos de Aridane</div>
+      <h1 class="hero-title">Jardín de La Bombilla</h1>
+      <p class="hero-subtitle">La Bombilla · Herrumbre Vivo · 2024</p>
+    </div>
+  </div>
+
+  <div class="lang-bar" id="bombilla-bar">
+    <button class="lang-btn active" onclick="setLang('bombilla','es',this)">Español</button>
+    <button class="lang-btn" onclick="setLang('bombilla','en',this)">English</button>
+    <button class="lang-btn" onclick="setLang('bombilla','de',this)">Deutsch</button>
+    <button class="lang-btn" onclick="setLang('bombilla','fr',this)">Français</button>
+  </div>
+
+  <div class="section lang-panel active" id="bombilla-es">
+    <div class="section-label">Sobre la actuación</div>
+    <div class="description">
+      <p>En 2024 se desarrolló una actuación de recuperación y puesta en valor de este jardín del barrio de La Bombilla, en Los Llanos de Aridane. La intervención combinó labores de limpieza, acondicionamiento y mejora del espacio con la incorporación de esculturas de Herrumbre Vivo, integradas en el entorno como parte de una propuesta artística y ambiental.</p>
+      <p>El proyecto contó con la colaboración de la <strong>Asociación de Vecinos Varadero La Bombilla</strong> y fue financiado por las áreas de <strong>Turismo y Medio Ambiente del Ayuntamiento de Los Llanos de Aridane</strong>.</p>
+      <p>Las obras fueron realizadas en 2024 y forman un conjunto escultórico integrado en el jardín. No cuentan con títulos individuales.</p>
+    </div>
+  </div>
+
+  <div class="section lang-panel" id="bombilla-en">
+    <div class="section-label">About the project</div>
+    <div class="description">
+      <p>[ENGLISH TEXT PENDING]</p>
+    </div>
+  </div>
+
+  <div class="section lang-panel" id="bombilla-de">
+    <div class="section-label">Über das Projekt</div>
+    <div class="description">
+      <p>[DEUTSCHER TEXT AUSSTEHEND]</p>
+    </div>
+  </div>
+
+  <div class="section lang-panel" id="bombilla-fr">
+    <div class="section-label">À propos du projet</div>
+    <div class="description">
+      <p>[TEXTE FRANÇAIS À AJOUTER]</p>
+    </div>
+  </div>
+
+  <div class="gallery-strip">
+    <!-- Sustituir cada placeholder por imágenes <img src="..." alt="..."> -->
+    <div class="placeholder-img">Foto del conjunto</div>
+    <div class="placeholder-img">Foto de escultura</div>
+    <div class="placeholder-img">Foto de detalle</div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Arte y sensibilización ambiental</div>
+    <div class="description">
+      <p>La actuación combina la recuperación del espacio, la participación vecinal y la presencia de obras de Herrumbre Vivo con una vertiente de sensibilización ambiental.</p>
+      <p>Como complemento, se plantea la realización de un <strong>taller ambiental dedicado al medio marino</strong>. La fecha y el formato de la inauguración del jardín se incorporarán cuando queden confirmados.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Sobre el autor</div>
+    <!-- SUSTITUIR por la misma foto de Gustavo utilizada en las demás fichas -->
+    <div class="bio-photo-placeholder">Foto de Gustavo Díaz</div>
+    <div class="description">
+      <p>Natural de Fuencaliente, Gustavo Díaz crea bajo la marca Herrumbre Vivo proyectos que combinan arte, sostenibilidad, identidad cultural y participación ciudadana. Transforma materiales en desuso en esculturas e instalaciones que ponen en valor las tradiciones y el patrimonio de Canarias.</p>
+      <p>Es el creador e impulsor de CaminArte, un innovador proyecto de geolocalización cultural e itinerarios artísticos sostenibles que fusiona la memoria histórica, el paisaje palmero y el arte del metal reciclado en favor del medio ambiente.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Ubicación</div>
+    <p style="font-size:13.5px;color:var(--gris-medio);margin-bottom:13px;">Barrio de La Bombilla, Los Llanos de Aridane</p>
+
+    <!-- PENDIENTE: sustituir por coordenadas exactas del jardín cuando las tengas -->
+    <div style="height:190px;border-radius:8px;background:rgba(120,100,80,.10);display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;color:var(--gris-medio);font-size:12px;">
+      MAPA PENDIENTE<br>Insertar coordenadas exactas del jardín
+    </div>
+  </div>
+
+  <div class="section otras-section">
+    <div class="section-label">Colaboración</div>
+    <div class="poi-list">
+      <div class="poi-card">
+        <div class="poi-info">
+          <div class="poi-name">Asociación de Vecinos Varadero La Bombilla</div>
+          <div class="poi-cat">Colaboración vecinal</div>
+        </div>
+      </div>
+      <div class="poi-card">
+        <div class="poi-info">
+          <div class="poi-name">Ayuntamiento de Los Llanos de Aridane</div>
+          <div class="poi-cat">Financiación · Áreas de Turismo y Medio Ambiente</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer footer-hv">
+    <div class="footer-links">
+      <a href="https://herrumbrevivoarte.com" target="_blank">herrumbrevivoarte.com</a>
+      <a href="#" onclick="return false;">[Enlace definitivo de CaminArte]</a>
+    </div>
+    <p class="footer-copy">CaminArte · Proyecto artístico y cultural · Herrumbre Vivo</p>
+  </footer>
+</div>
+
+<script>
+function setLang(obra,lang,btn){
+  document.getElementById(obra+'-bar').querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('obra-'+obra).querySelectorAll('.lang-panel').forEach(p=>p.classList.remove('active'));
+  const panel=document.getElementById(obra+'-'+lang);
+  if(panel)panel.classList.add('active');
+}
+</script>
+</body>
+</html>
