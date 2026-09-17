@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cabras del Mercadillo · Puntallana · Herrumbre Vivo</title>
+<meta name="description" content="Cabras metálicas de Herrumbre Vivo en el Mercadillo del Agricultor de Puntallana. Arte, memoria rural y reutilización de materiales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --marron:#2C1A0E;
+  --dorado:#C8A84B;
+  --arena:#D4B96A;
+  --crema:#FAF6F0;
+  --gris:#7A6A5A;
+  --granate:#8B1A1A;
+  --blanco:#FFFFFF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--crema);
+  color:#1a1a1a;
+  max-width:480px;
+  margin:0 auto;
+  min-height:100vh;
+}
+.obra-header{
+  padding:10px 18px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:var(--marron);
+  border-bottom:1px solid rgba(212,185,106,.18);
+}
+.obra-num{
+  font-size:9px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-weight:500;
+  color:var(--dorado);
+  flex-shrink:0;
+}
+.obra-header-title{
+  font-family:'Playfair Display',serif;
+  font-size:13px;
+  color:var(--arena);
+  flex:1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.obra-header-tag{
+  font-size:8px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:3px 7px;
+  border-radius:10px;
+  background:rgba(200,168,75,.2);
+  color:var(--dorado);
+  flex-shrink:0;
+}
+.hero{
+  position:relative;
+  height:60vh;
+  min-height:360px;
+  overflow:hidden;
+  background:#5d5146;
+}
+.hero-placeholder{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  text-align:center;
+  padding:28px;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(212,185,106,.16), transparent 34%),
+    linear-gradient(145deg,#524438,#2C1A0E);
+  color:rgba(250,246,240,.82);
+}
+.hero-placeholder svg{opacity:.72}
+.placeholder-title{
+  font-family:'Playfair Display',serif;
+  font-size:22px;
+  color:var(--arena);
+}
+.placeholder-sub{
+  max-width:290px;
+  font-size:12px;
+  line-height:1.55;
+  color:rgba(250,246,240,.58);
+}
+.hero-img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  display:none;
+}
+.hero-img.loaded{display:block}
+.hero-gradient{
+  position:absolute;
+  z-index:2;
+  left:0;
+  right:0;
+  bottom:0;
+  height:64%;
+  background:linear-gradient(to top,rgba(44,26,14,.94),transparent);
+  pointer-events:none;
+}
+.hero-text{
+  position:absolute;
+  z-index:3;
+  left:0;
+  right:0;
+  bottom:0;
+  padding:26px 22px 22px;
+}
+.proyecto-tag{
+  display:inline-block;
+  font-size:9px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--arena);
+  background:rgba(44,26,14,.5);
+  border:1px solid rgba(212,185,106,.3);
+  padding:3px 9px;
+  border-radius:3px;
+  margin-bottom:9px;
+}
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:2.35rem;
+  color:#fff;
+  line-height:1.05;
+  margin-bottom:5px;
+}
+.hero-subtitle{
+  font-size:12px;
+  color:var(--arena);
+  font-weight:300;
+}
+.lang-bar{
+  padding:12px 18px;
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  border-top:1px solid rgba(212,185,106,.15);
+  background:var(--marron);
+}
+.lang-bar::-webkit-scrollbar{display:none}
+.lang-btn{
+  flex-shrink:0;
+  padding:6px 15px;
+  border-radius:20px;
+  background:transparent;
+  border:1px solid rgba(212,185,106,.25);
+  color:var(--arena);
+  font-family:'DM Sans',sans-serif;
+  font-size:12px;
+  cursor:pointer;
+  transition:all .2s;
+}
+.lang-btn.active{
+  background:var(--dorado);
+  border-color:var(--dorado);
+  color:#1a1a1a;
+}
+.lang-content{display:none}
+.lang-content.active{display:block;animation:fadeIn .22s ease}
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(3px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.section{
+  padding:24px 22px;
+  border-bottom:1px solid rgba(120,100,80,.12);
+}
+.section-label{
+  font-size:9px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--gris);
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+.section-label::before{
+  content:'';
+  display:block;
+  width:16px;
+  height:1px;
+  background:var(--dorado);
+}
+.description{
+  font-size:14.5px;
+  line-height:1.74;
+  color:#2a2a2a;
+  font-weight:300;
+}
+.description p+p{margin-top:13px}
+.bio-photo{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  object-position:center;
+  border-radius:8px;
+  margin-bottom:14px;
+  display:block;
+  background:#e9e1d7;
+}
+.map-embed{
+  width:100%;
+  height:190px;
+  border:none;
+  border-radius:8px;
+  margin:13px 0 11px;
+  display:block;
+}
+.btn-maps,.btn-caminarte{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  width:100%;
+  padding:13px;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  font-family:'DM Sans',sans-serif;
+  font-size:14px;
+  font-weight:500;
+  cursor:pointer;
+  text-decoration:none;
+  transition:background .2s;
+}
+.btn-maps{background:var(--granate)}
+.btn-maps:hover{background:#6B1212}
+.btn-caminarte{
+  margin-top:10px;
+  color:var(--marron);
+  background:var(--dorado);
+}
+.btn-caminarte:hover{background:#b99739}
+.note-card{
+  padding:16px;
+  border-radius:10px;
+  background:rgba(44,26,14,.045);
+  border:1px solid rgba(120,100,80,.13);
+}
+.note-card p{
+  font-size:13px;
+  line-height:1.6;
+  color:var(--gris);
+}
+.footer{
+  padding:24px 22px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  border-top:3px solid var(--dorado);
+  background:#1C1008;
+}
+.footer-title{
+  font-family:'Playfair Display',serif;
+  color:var(--arena);
+  font-size:17px;
+}
+.footer-links{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:6px 14px;
+}
+.footer-links a{
+  color:rgba(212,185,106,.68);
+  font-size:10.5px;
+  text-decoration:none;
+}
+.footer-copy{
+  font-size:9px;
+  color:rgba(212,185,106,.35);
+  text-align:center;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+}
+@media(min-width:600px){
+  body{max-width:900px}
+  .hero{height:52vh;min-height:430px}
+  .hero-title{font-size:3rem}
+  .obra-header{padding:12px 28px}
+  .section{padding:28px 32px}
+  .lang-bar{padding:14px 28px}
+  .map-embed{height:260px}
+  .bio-photo{height:300px}
+}
+@media(min-width:1024px){
+  body{max-width:1100px}
+  .hero{height:55vh}
+}
+</style>
+</head>
+
+<body>
+<div id="obra-cabras">
+
+  <div class="obra-header">
+    <div class="obra-num">CaminArte</div>
+    <div class="obra-header-title">Cabras del Mercadillo</div>
+    <div class="obra-header-tag">Herrumbre Vivo</div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-placeholder" id="hero-placeholder" aria-hidden="true">
+      <svg width="62" height="62" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25">
+        <rect x="3" y="5" width="18" height="14" rx="2"/>
+        <circle cx="8.5" cy="10" r="1.5"/>
+        <path d="M21 15l-5-5L5 19"/>
+      </svg>
+      <div class="placeholder-title">Fotografía de la obra</div>
+      <div class="placeholder-sub">Este espacio queda preparado para la imagen de las cabras del Mercadillo del Agricultor de Puntallana.</div>
+    </div>
+
+    <img
+      class="hero-img"
+      id="hero-image"
+      src="img/cabras-puntallana.jpg"
+      alt="Cabras metálicas de Herrumbre Vivo en el Mercadillo del Agricultor de Puntallana"
+    >
+
+    <div class="hero-gradient"></div>
+
+    <div class="hero-text">
+      <div class="proyecto-tag">Herrumbre Vivo · CaminArte · Puntallana</div>
+      <h1 class="hero-title">Cabras del Mercadillo</h1>
+      <p class="hero-subtitle">Mercadillo del Agricultor · Puntallana</p>
+    </div>
+  </div>
+
+  <div class="lang-bar">
+    <button class="lang-btn active" onclick="setLang('es',this)">Español</button>
+    <button class="lang-btn" onclick="setLang('en',this)">English</button>
+    <button class="lang-btn" onclick="setLang('de',this)">Deutsch</button>
+    <button class="lang-btn" onclick="setLang('fr',this)">Français</button>
+  </div>
+
+  <div class="lang-content active" id="lang-es">
+    <div class="section">
+      <div class="section-label">Sobre la obra</div>
+      <div class="description">
+        <p>En el corazón del Mercadillo del Agricultor de Puntallana, estas cabras metálicas no solo captan la atención: cuentan una historia.</p>
+        <p>Confeccionadas a partir de herramientas olvidadas y materiales reciclados, las cabras de Herrumbre Vivo rinden homenaje a la tradición ganadera del municipio, recordando el vínculo ancestral entre el pastoreo, la producción de queso y la vida rural.</p>
+        <p>Ubicadas en un espacio donde agricultores, artesanos y vecinos se reúnen cada semana, estas esculturas nos invitan a reflexionar sobre cómo la mecanización transformó el campo, dejando atrás los útiles de siempre, pero no su memoria.</p>
+        <p>Aquí, el arte recupera lo que parecía inservible y lo convierte en símbolo: una celebración de las raíces de Puntallana y del valor de mirar al pasado con respeto para construir un futuro más consciente y sostenible.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Sobre el autor</div>
+      <img
+        class="bio-photo"
+        src="img/gustavo.jpg"
+        onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/herrumbrevivo/bbaja/main/img/gustavo.jpg';"
+        alt="Gustavo Díaz, Herrumbre Vivo"
+      >
+      <div class="description">
+        <p>Natural de Fuencaliente, <strong>Gustavo Díaz</strong> crea bajo la marca Herrumbre Vivo proyectos que combinan arte, sostenibilidad, identidad cultural y participación ciudadana. Transforma materiales en desuso en esculturas e instalaciones que ponen en valor las tradiciones y el patrimonio de Canarias.</p>
+        <p>Es el creador e impulsor de <strong>CaminArte</strong>, un proyecto de geolocalización cultural e itinerarios artísticos sostenibles que fusiona la memoria histórica, el paisaje palmero y el arte del metal reciclado en favor del medio ambiente.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Ubicación</div>
+      <p style="font-size:13.5px;color:var(--gris);margin-bottom:13px;">Mercadillo del Agricultor de Puntallana</p>
+      <iframe
+        class="map-embed"
+        src="https://maps.google.com/maps?q=Mercadillo%20del%20Agricultor%20de%20Puntallana%2C%20La%20Palma&z=16&output=embed"
+        allowfullscreen
+        loading="lazy"
+        title="Mapa del Mercadillo del Agricultor de Puntallana"
+      ></iframe>
+      <a class="btn-maps" href="https://www.google.com/maps/search/?api=1&query=Mercadillo%20del%20Agricultor%20de%20Puntallana%2C%20La%20Palma" target="_blank" rel="noopener">Abrir en Google Maps</a>
+      <a class="btn-caminarte" href="https://caminarte.es/" target="_blank" rel="noopener">Descubrir CaminArte</a>
+    </div>
+  </div>
+
+  <div class="lang-content" id="lang-en">
+    <div class="section">
+      <div class="section-label">About the artwork</div>
+      <div class="description">
+        <p>In the heart of Puntallana Farmers' Market, these metal goats do more than catch the eye: they tell a story.</p>
+        <p>Made from forgotten tools and recycled materials, Herrumbre Vivo's goats pay tribute to the municipality's livestock tradition, recalling the ancestral link between herding, cheese production and rural life.</p>
+        <p>Set in a place where farmers, craftspeople and local residents meet every week, these sculptures invite us to reflect on how mechanisation transformed the countryside, leaving traditional tools behind, but not their memory.</p>
+        <p>Here, art recovers what seemed useless and turns it into a symbol: a celebration of Puntallana's roots and of the value of looking to the past with respect in order to build a more conscious and sustainable future.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">About the artist</div>
+      <img
+        class="bio-photo"
+        src="img/gustavo.jpg"
+        onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/herrumbrevivo/bbaja/main/img/gustavo.jpg';"
+        alt="Gustavo Díaz, Herrumbre Vivo"
+      >
+      <div class="description">
+        <p>Born in Fuencaliente, <strong>Gustavo Díaz</strong> creates projects under the Herrumbre Vivo name that combine art, sustainability, cultural identity and community participation. He transforms discarded materials into sculptures and installations that highlight the traditions and heritage of the Canary Islands.</p>
+        <p>He is the creator and driving force behind <strong>CaminArte</strong>, a cultural geolocation and sustainable artistic itinerary project that brings together historical memory, the landscape of La Palma and recycled metal art in support of environmental awareness.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Location</div>
+      <p style="font-size:13.5px;color:var(--gris);margin-bottom:13px;">Puntallana Farmers' Market</p>
+      <iframe
+        class="map-embed"
+        src="https://maps.google.com/maps?q=Mercadillo%20del%20Agricultor%20de%20Puntallana%2C%20La%20Palma&z=16&output=embed"
+        allowfullscreen
+        loading="lazy"
+        title="Map of Puntallana Farmers' Market"
+      ></iframe>
+      <a class="btn-maps" href="https://www.google.com/maps/search/?api=1&query=Mercadillo%20del%20Agricultor%20de%20Puntallana%2C%20La%20Palma" target="_blank" rel="noopener">Open in Google Maps</a>
+      <a class="btn-caminarte" href="https://caminarte.es/" target="_blank" rel="noopener">Discover CaminArte</a>
+    </div>
+  </div>
+
+  <div class="lang-content" id="lang-de">
+    <div class="section">
+      <div class="section-label">Über das Kunstwerk</div>
+      <div class="description">
+        <p>Im Herzen des Bauernmarkts von Puntallana ziehen diese Metallziegen nicht nur die Blicke auf sich: Sie erzählen eine Geschichte.</p>
+        <p>Aus vergessenen Werkzeugen und recycelten Materialien gefertigt, würdigen die Ziegen von Herrumbre Vivo die Viehzuchttradition der Gemeinde und erinnern an die jahrhundertealte Verbindung zwischen Weidewirtschaft, Käseherstellung und ländlichem Leben.</p>
+        <p>An einem Ort, an dem sich Landwirte, Kunsthandwerker und Einwohner jede Woche treffen, laden die Skulpturen dazu ein, darüber nachzudenken, wie die Mechanisierung die Landwirtschaft verändert hat: Die alten Werkzeuge verschwanden aus dem Alltag, ihre Erinnerung jedoch nicht.</p>
+        <p>Hier gewinnt die Kunst zurück, was unbrauchbar schien, und verwandelt es in ein Symbol: eine Würdigung der Wurzeln Puntallanas und des Wertes, respektvoll in die Vergangenheit zu blicken, um eine bewusstere und nachhaltigere Zukunft zu gestalten.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Über den Künstler</div>
+      <img
+        class="bio-photo"
+        src="img/gustavo.jpg"
+        onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/herrumbrevivo/bbaja/main/img/gustavo.jpg';"
+        alt="Gustavo Díaz, Herrumbre Vivo"
+      >
+      <div class="description">
+        <p>Der aus Fuencaliente stammende <strong>Gustavo Díaz</strong> entwickelt unter dem Namen Herrumbre Vivo Projekte, die Kunst, Nachhaltigkeit, kulturelle Identität und Bürgerbeteiligung miteinander verbinden. Er verwandelt ausgediente Materialien in Skulpturen und Installationen, die Traditionen und Kulturerbe der Kanarischen Inseln hervorheben.</p>
+        <p>Er ist der Schöpfer und Initiator von <strong>CaminArte</strong>, einem Projekt zur kulturellen Geolokalisierung und zu nachhaltigen künstlerischen Routen, das historische Erinnerung, die Landschaft La Palmas und Kunst aus recyceltem Metall im Sinne des Umweltschutzes miteinander verbindet.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Standort</div>
+      <p style="font-size:13.5px;color:var(--gris);margin-bottom:13px;">Bauernmarkt von Puntallana</p>
+      <iframe
+        class="map-embed"
+        src="https://maps.google.com/maps?q=Mercadillo%20del%20Agricultor%20de%20Puntallana%2C%20La%20Palma&z=16&output=embed"
+        allowfullscreen
+        loading="lazy"
+        title="Karte des Bauernmarkts von Puntallana"
+      ></iframe>
+      <a class="btn-maps" href="https://www.google.com/maps/search/?api=1&query=Mercadillo%20del%20Agricultor%20de%20Puntallana%2C%20La%20Palma" target="_blank" rel="noopener">In Google Maps öffnen</a>
+      <a class="btn-caminarte" href="https://caminarte.es/" target="_blank" rel="noopener">CaminArte entdecken</a>
+    </div>
+  </div>
+
+  <div class="lang-content" id="lang-fr">
+    <div class="section">
+      <div class="section-label">À propos de l'œuvre</div>
+      <div class="description">
+        <p>Au cœur du marché des agriculteurs de Puntallana, ces chèvres métalliques n'attirent pas seulement le regard : elles racontent une histoire.</p>
+        <p>Fabriquées à partir d'outils oubliés et de matériaux recyclés, les chèvres de Herrumbre Vivo rendent hommage à la tradition d'élevage de la commune et rappellent le lien ancestral entre le pastoralisme, la production de fromage et la vie rurale.</p>
+        <p>Installées dans un lieu où agriculteurs, artisans et habitants se retrouvent chaque semaine, ces sculptures nous invitent à réfléchir à la manière dont la mécanisation a transformé la campagne, reléguant les outils d'autrefois sans pour autant effacer leur mémoire.</p>
+        <p>Ici, l'art récupère ce qui semblait inutilisable et le transforme en symbole : une célébration des racines de Puntallana et de la valeur d'un regard respectueux sur le passé pour construire un avenir plus conscient et durable.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">À propos de l'artiste</div>
+      <img
+        class="bio-photo"
+        src="img/gustavo.jpg"
+        onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/herrumbrevivo/bbaja/main/img/gustavo.jpg';"
+        alt="Gustavo Díaz, Herrumbre Vivo"
+      >
+      <div class="description">
+        <p>Originaire de Fuencaliente, <strong>Gustavo Díaz</strong> crée sous le nom Herrumbre Vivo des projets qui associent art, durabilité, identité culturelle et participation citoyenne. Il transforme des matériaux hors d'usage en sculptures et installations qui mettent en valeur les traditions et le patrimoine des îles Canaries.</p>
+        <p>Il est le créateur et le moteur de <strong>CaminArte</strong>, un projet de géolocalisation culturelle et d'itinéraires artistiques durables qui réunit mémoire historique, paysage de La Palma et art en métal recyclé au service de la sensibilisation environnementale.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Emplacement</div>
+      <p style="font-size:13.5px;color:var(--gris);margin-bottom:13px;">Marché des agriculteurs de Puntallana</p>
+      <iframe
+        class="map-embed"
+        src="https://maps.google.com/maps?q=Mercadillo%20del%20Agricultor%20de%20Puntallana%2C%20La%20Palma&z=16&output=embed"
+        allowfullscreen
+        loading="lazy"
+        title="Carte du marché des agriculteurs de Puntallana"
+      ></iframe>
+      <a class="btn-maps" href="https://www.google.com/maps/search/?api=1&query=Mercadillo%20del%20Agricultor%20de%20Puntallana%2C%20La%20Palma" target="_blank" rel="noopener">Ouvrir dans Google Maps</a>
+      <a class="btn-caminarte" href="https://caminarte.es/" target="_blank" rel="noopener">Découvrir CaminArte</a>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Imagen pendiente</div>
+    <div class="note-card">
+      <p>La página ya está preparada para mostrar la fotografía principal en cuanto se añada el archivo <strong>img/cabras-puntallana.jpg</strong>. Mientras no exista, se verá el placeholder de la cabecera.</p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-title">Herrumbre Vivo</div>
+    <div class="footer-links">
+      <a href="https://caminarte.es/" target="_blank" rel="noopener">CaminArte</a>
+      <a href="https://herrumbrevivoarte.com/" target="_blank" rel="noopener">Herrumbre Vivo Arte</a>
+    </div>
+    <div class="footer-copy">CaminArte · Herrumbre Vivo · La Palma</div>
+  </footer>
+</div>
+
+<script>
+function setLang(lang, button){
+  document.querySelectorAll('.lang-content').forEach(function(el){
+    el.classList.remove('active');
+  });
+  document.querySelectorAll('.lang-btn').forEach(function(el){
+    el.classList.remove('active');
+  });
+  document.getElementById('lang-' + lang).classList.add('active');
+  button.classList.add('active');
+  document.documentElement.lang = lang;
+}
+
+(function(){
+  var image = document.getElementById('hero-image');
+  var placeholder = document.getElementById('hero-placeholder');
+
+  image.addEventListener('load', function(){
+    image.classList.add('loaded');
+    placeholder.style.display = 'none';
+  });
+
+  image.addEventListener('error', function(){
+    image.classList.remove('loaded');
+    placeholder.style.display = 'flex';
+  });
+
+  if (image.complete && image.naturalWidth > 0){
+    image.classList.add('loaded');
+    placeholder.style.display = 'none';
+  }
+})();
+</script>
+</body>
+</html>
